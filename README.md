@@ -2,6 +2,8 @@
 
 ## Data Analyst | Business Intelligence Developer | Python & SQL Developer | Power BI Specialist
 
+https://saigullapelli42-debug.github.io/sai-portfolio/
+
 I am a **Data Analytics professional with 4+ years of experience** in analysing complex datasets, developing interactive dashboards, automating reporting processes, and delivering data-driven solutions that support business decision-making.
 
 My expertise spans **Python, SQL, Power BI, PostgreSQL, Excel, and Data Visualisation**, with a strong focus on transforming raw data into meaningful insights. I enjoy solving business challenges through analytics, building scalable data solutions, and continuously learning emerging technologies in data engineering and machine learning.
