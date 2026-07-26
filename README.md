@@ -2,7 +2,7 @@
 
 ## Data Analyst | Business Intelligence Developer | Python & SQL Developer | Power BI Specialist
 
-https://saigullapelly-data-analyst.github.io/sai-portfolio/
+https://saigullapelly-data-analyst.github.io/My-Portfolio/
 
 I am a **Data Analytics professional with 4+ years of experience** in analysing complex datasets, developing interactive dashboards, automating reporting processes, and delivering data-driven solutions that support business decision-making.
 
