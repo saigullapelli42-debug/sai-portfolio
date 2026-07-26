@@ -21,6 +21,11 @@
   --teal-lt:   #22c55e;
   --red:       #ef4444;
   --rule:      #2b2c2b;
+  --blue:      #3b82f6;
+  --purple:    #a855f8;
+  --orange:    #f97316;
+  --pink:      #ec4899;
+  --cyan:      #22d3ee;
   --mono:      'IBM Plex Mono', monospace;
   --serif:     'Playfair Display', Georgia, serif;
   --sans:      'IBM Plex Sans', sans-serif;
@@ -119,6 +124,67 @@ nav {
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
+/* ─── COLORFUL ANIMATED BACKGROUNDS ─────────────────── */
+.bg-blobs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  filter: blur(70px);
+  opacity: .55;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.blob-1 { width: 480px; height: 480px; background: var(--blue);   top: -140px; left: -100px;  animation: driftA 22s ease-in-out infinite; }
+.blob-2 { width: 380px; height: 380px; background: var(--purple); top: 120px;  right: -120px; animation: driftB 26s ease-in-out infinite; }
+.blob-3 { width: 320px; height: 320px; background: var(--orange); bottom: -120px; left: 20%;  animation: driftC 20s ease-in-out infinite; }
+.blob-4 { width: 260px; height: 260px; background: var(--gold);   bottom: 40px; right: 18%;   animation: driftA 30s ease-in-out infinite reverse; }
+.blob-5 { width: 220px; height: 220px; background: var(--pink);   top: 40%; left: 45%;        animation: driftB 24s ease-in-out infinite; }
+
+@keyframes driftA {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(60px,40px) scale(1.12); }
+  66%      { transform: translate(-30px,60px) scale(.94); }
+}
+@keyframes driftB {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(-70px,-50px) scale(1.15); }
+}
+@keyframes driftC {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(50px,-40px) scale(1.08); }
+}
+
+/* data-point network overlay: nodes + lines pulsing like live analytics */
+.data-network {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .5;
+}
+.data-network circle { animation: pulseDot 3.6s ease-in-out infinite; }
+.data-network line { stroke-dasharray: 6 6; animation: flowLine 6s linear infinite; }
+@keyframes pulseDot {
+  0%, 100% { opacity: .25; r: 2.4; }
+  50%      { opacity: 1;   r: 3.6; }
+}
+@keyframes flowLine {
+  to { stroke-dashoffset: -120; }
+}
+
+/* soft corner glows reused across sections for a consistent colorful thread */
+.sec-glow { position: absolute; z-index: 0; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .data-network circle, .data-network line { animation: none !important; }
+}
+
 /* ─── HERO ───────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
@@ -138,6 +204,7 @@ nav {
   padding: 80px 60px 80px 0;
   border-right: 1px solid var(--rule);
   position: relative;
+  z-index: 1;
 }
 
 .hero-eyebrow {
@@ -230,6 +297,8 @@ nav {
   flex-direction: column;
   justify-content: center;
   padding: 80px 0 80px 60px;
+  position: relative;
+  z-index: 1;
 }
 
 .stats-block {
@@ -289,9 +358,22 @@ nav {
 .pill:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 /* ─── SECTION GENERIC ────────────────────────────────── */
-.wrap { max-width: 1180px; margin: 0 auto; padding: 0 80px; }
-section { padding: 100px 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 80px; position: relative; z-index: 1; }
+section { padding: 100px 0; position: relative; overflow: hidden; }
 section + section { border-top: 1px solid var(--rule); }
+
+/* colorful corner accents echoed through each section */
+.glow { position: absolute; z-index: 0; border-radius: 50%; filter: blur(100px); pointer-events: none; animation: glowPulse 8s ease-in-out infinite; }
+.glow-blue   { background: var(--blue); }
+.glow-purple { background: var(--purple); }
+.glow-orange { background: var(--orange); }
+.glow-pink   { background: var(--pink); }
+.glow-cyan   { background: var(--cyan); }
+@keyframes glowPulse {
+  0%, 100% { opacity: .18; transform: scale(1); }
+  50%      { opacity: .32; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) { .glow { animation: none; } }
 
 .sec-header {
   display: grid;
@@ -703,6 +785,38 @@ footer p {
 
 <!-- ── HERO ────────────────────────────────────── -->
 <header class="hero">
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+  </div>
+  <svg class="data-network" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="var(--gold)" stroke-opacity=".35" stroke-width="1">
+      <line x1="120" y1="140" x2="340" y2="260"></line>
+      <line x1="340" y1="260" x2="260" y2="480"></line>
+      <line x1="340" y1="260" x2="560" y2="180"></line>
+      <line x1="560" y1="180" x2="780" y2="320"></line>
+      <line x1="780" y1="320" x2="1020" y2="200"></line>
+      <line x1="780" y1="320" x2="880" y2="560"></line>
+      <line x1="260" y1="480" x2="480" y2="620"></line>
+      <line x1="480" y1="620" x2="700" y2="560"></line>
+      <line x1="1020" y1="200" x2="1120" y2="420"></line>
+    </g>
+    <g fill="var(--gold)">
+      <circle cx="120" cy="140" r="3"></circle>
+      <circle cx="340" cy="260" r="3"></circle>
+      <circle cx="260" cy="480" r="3"></circle>
+      <circle cx="560" cy="180" r="3"></circle>
+      <circle cx="780" cy="320" r="3"></circle>
+      <circle cx="1020" cy="200" r="3"></circle>
+      <circle cx="880" cy="560" r="3"></circle>
+      <circle cx="480" cy="620" r="3"></circle>
+      <circle cx="700" cy="560" r="3"></circle>
+      <circle cx="1120" cy="420" r="3"></circle>
+    </g>
+  </svg>
   <div class="hero-left">
     <div class="hero-eyebrow">Data Analyst · TCS · Hyderabad</div>
     <h1>Gullapelly<span class="line2">Sai</span></h1>
@@ -753,6 +867,7 @@ footer p {
 
 <!-- ── SKILLS ───────────────────────────────────── -->
 <section id="skills">
+  <div class="glow glow-blue" style="width:420px;height:420px;top:-160px;right:-140px;"></div>
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-num">01 — Skills</div>
@@ -804,6 +919,7 @@ footer p {
 
 <!-- ── EXPERIENCE ────────────────────────────────── -->
 <section id="experience">
+  <div class="glow glow-purple" style="width:380px;height:380px;bottom:-140px;left:-120px;"></div>
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-num">02 — Experience</div>
@@ -843,6 +959,7 @@ footer p {
 
 <!-- ── PROJECTS ──────────────────────────────────── -->
 <section id="projects">
+  <div class="glow glow-orange" style="width:360px;height:360px;top:-120px;right:10%;"></div>
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-num">03 — Projects</div>
@@ -879,6 +996,7 @@ footer p {
 
 <!-- ── CERTIFICATIONS ────────────────────────────── -->
 <section id="certifications">
+  <div class="glow glow-pink" style="width:340px;height:340px;bottom:-120px;right:-100px;"></div>
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-num">04 — Certifications</div>
@@ -926,6 +1044,7 @@ footer p {
 
 <!-- ── EDUCATION ─────────────────────────────────── -->
 <section id="education">
+  <div class="glow glow-cyan" style="width:320px;height:320px;top:-100px;left:8%;"></div>
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-num">05 — Education</div>
@@ -962,6 +1081,8 @@ footer p {
 
 <!-- ── CONTACT ───────────────────────────────────── -->
 <section id="contact">
+  <div class="glow glow-blue" style="width:400px;height:400px;top:-140px;left:20%;"></div>
+  <div class="glow glow-purple" style="width:300px;height:300px;bottom:-120px;right:10%;"></div>
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-num">06 — Contact</div>
